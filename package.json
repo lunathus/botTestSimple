@@ -1,7 +1,7 @@
 {
   "name": "botzitcho",
-  "version": "0.0.0",
   "description": "botzitcho que da boas vindas",
+  "version": "0.0.0",
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js"
