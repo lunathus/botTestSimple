@@ -1,14 +1,13 @@
 {
   "name": "botzitcho",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "botzitcho que da boas vindas",
   "main": "bot.js",
-  "author": "lunathus",
   "scripts": {
     "start": "node bot.js"
   },
   "dependencies": {
-    "discord.js": "^2.5.1",
+    "discord.js": "11.1.0",
     "request": "2.81.0"
     }
   }
