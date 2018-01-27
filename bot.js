@@ -9,6 +9,9 @@ client.on('message', message => {
     if (message.content === '!ping') {
     	message.channel.send('Pong');
   	}
+    if (message.content === '!gw2') {
+    	message.channel.send('NOOOOOOOOOO!');
+  	}
 });
 
 // THIS  MUST  BE  THIS  WAY
