@@ -1,0 +1,11 @@
+{
+  "name": "botzitcho",
+  "version": "1.0.0",
+  "description": "botzitcho que da boas vindas",
+  "main": "bot.js",
+  "author": "lunathus",
+  "dependencies": {
+    "discord.js": "^2.5.1",
+    "winston": "^2.3.1"
+    }
+  }
