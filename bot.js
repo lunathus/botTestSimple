@@ -11,6 +11,8 @@ client.on('message', message => {
   	}
     if (message.content === '!gw2') {
     	message.channel.send('NOOOOOOOOOO!');
+        message.channel.send('...');
+        message.channel.send('Okay...');
   	}
 });
 
