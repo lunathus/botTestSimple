@@ -16,16 +16,15 @@ client.on('message', message => {
   	}
   if (message.content === '!way')
   {
-  var voiceChannel = message.member.voiceChannel;
-
-      voiceChannel.join().then(connection =>
-      {
-         message.channel.send('Okay...1');
-         const dispatcher = connection.playFile('./Audio/way.mp3');
-
-         dispatcher.on("end", end => { voiceChannel.leave(); });
-
-       }).catch(err => message.channel.send(err));
+  if (message.member.voiceChannel) {
+      message.member.voiceChannel.join()
+        .then(connection => { // Connection is an instance of VoiceConnection
+          message.reply('I have successfully connected to the channel!');
+        })
+        .catch(console.log);
+    } else {
+      message.reply('You need to join a voice channel first!');
+    }
    message.channel.send('Okay...4');
   }
 });
