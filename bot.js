@@ -16,11 +16,11 @@ client.on('message', message => {
   	}
   if (message.content === '!way')
   {
-  message.channel.send('Okay...1');
-  message.member.voiceChannel.join()
-  .then(connection => message.channel.send('Connected!'))
-  .catch(console.error);
-   message.channel.send('Okay...4');
+   message.channel.send('QUASE LA');
+      message.member.voiceChannel.join()
+      .then(connection => {message.reply('PORRA!');})
+      .catch(message.reply("erro louco"));
+       message.channel.send('Okay...4');
   }
     if (message.content === '!ch')
     {
