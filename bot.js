@@ -26,7 +26,7 @@ client.on('message', message => {
      dispatcher.on("end", end => {
        voiceChannel.leave();
        });
-   }).catch(err => console.log(err)message.channel.send(err));
+   }).catch(err => console.log(err));
    isReady = true;
    message.channel.send('Okay...2');
   }
