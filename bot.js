@@ -19,7 +19,7 @@ client.on('message', message => {
    message.channel.send('QUASE LA');
       message.member.voiceChannel.join()
       .then(connection => {message.reply('PORRA!');})
-      .catch(message.reply("erro louco"));
+      .catch(err => message.reply(err));
        message.channel.send('Okay...4');
   }
     if (message.content === '!ch')
