@@ -22,6 +22,14 @@ client.on('message', message => {
   .catch(console.error);
    message.channel.send('Okay...4');
   }
+    if (message.content === '!ch')
+    {
+      if (message.member.voiceChannel) {
+      message.channel.send('voicechannel');
+    } else {
+      message.channel.send('You need to join a voice channel first!');
+    }
+  }
 });
 
 // THIS  MUST  BE  THIS  WAY
