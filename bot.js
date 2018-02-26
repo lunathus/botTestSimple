@@ -14,28 +14,18 @@ client.on('message', message => {
         message.channel.send('...');
         message.channel.send('Okay...');
   	}
-  if (message.content === '!way')
-  {
-   message.channel.send('QUASE LA');
-      message.member.voiceChannel.join()
-      .then(connection => 
-            {message.reply('PORRA!');
-             const dispatcher = connection.playFile('./Audio/way.mp3');
-             dispatcher.on("end", end => {
-             message.member.voiceChannel.leave();
-       });
-            })
-      .catch(err => message.reply(err));
-       message.channel.send('Okay...4');
-  }
-    if (message.content === '!ch')
+    if (message.content === '!way')
     {
-      if (message.member.voiceChannel) {
-      message.channel.send('voicechannel');
-    } else {
-      message.channel.send('You need to join a voice channel first!');
+      message.member.voiceChannel.join()
+       .then(connection => 
+          {message.reply('YOU DO NOT KNOW THE WAY!');
+           const dispatcher = connection.playFile('./Audio/way.mp3');
+           dispatcher.on("end", end => {
+           message.member.voiceChannel.leave();
+           });
+          })
+       .catch(err => message.reply(err));
     }
-  }
 });
 
 // THIS  MUST  BE  THIS  WAY
