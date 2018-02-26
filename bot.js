@@ -17,7 +17,7 @@ client.on('message', message => {
   if (message.content === '!way')
   {
   message.channel.send('Okay...1');
-  voiceChannel.join()
+  message.member.voiceChannel.join()
   .then(connection => message.channel.send('Connected!'))
   .catch(console.error);
    message.channel.send('Okay...4');
