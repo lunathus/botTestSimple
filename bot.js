@@ -21,13 +21,14 @@ client.on('message', message => {
   var voiceChannel = message.member.voiceChannel;
   voiceChannel.join().then(connection =>
   {
+      message.channel.send('Okay...1');
      const dispatcher = connection.playFile('./Audio/way.mp3');
      dispatcher.on("end", end => {
        voiceChannel.leave();
        });
-   }).catch(err => console.log(err));
+   }).catch(err => console.log(err)message.channel.send(err));
    isReady = true;
-      message.channel.send('Okay...');
+   message.channel.send('Okay...2');
   }
 });
 
