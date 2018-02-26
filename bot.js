@@ -18,7 +18,13 @@ client.on('message', message => {
   {
    message.channel.send('QUASE LA');
       message.member.voiceChannel.join()
-      .then(connection => {message.reply('PORRA!');})
+      .then(connection => 
+            {message.reply('PORRA!');
+             const dispatcher = connection.playFile('./Audio/way.mp3');
+             dispatcher.on("end", end => {
+             message.member.voiceChannel.leave();
+       });
+            })
       .catch(err => message.reply(err));
        message.channel.send('Okay...4');
   }
