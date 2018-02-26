@@ -18,13 +18,14 @@ client.on('message', message => {
   if (isReady && message.content === '!way')
   {
   isReady = false;
-  var voiceChannel = message.member.voiceChannel;
-  voiceChannel.join().then(connection =>
+  const channel = message.member.voiceChannel;
+
+    channel.join().then(connection =>
   {
       message.channel.send('Okay...1');
      const dispatcher = connection.playFile('./Audio/way.mp3');
      dispatcher.on("end", end => {
-       voiceChannel.leave();
+       channel.leave();
        });
    }).catch(err => console.log(err));
    isReady = true;
