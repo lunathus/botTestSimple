@@ -21,7 +21,7 @@ client.on('message', message => {
   var voiceChannel = message.member.voiceChannel;
   voiceChannel.join().then(connection =>
   {
-     const dispatcher = connection.playFile('./Audio/way.mp3');
+     const dispatcher = connection.playFile('./Audio/asd.png');
      dispatcher.on("end", end => {
        voiceChannel.leave();
        });
