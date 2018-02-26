@@ -16,11 +16,16 @@ client.on('message', message => {
   	}
   if (message.content === '!way')
   {
-  const channel = message.member.voiceChannel;
-      message.channel.send('Okay...1');
-    channel.join()
-    .then(connection => console.log('Connected!'))
-    .catch(console.error);
+  var voiceChannel = message.member.voiceChannel;
+
+      voiceChannel.join().then(connection =>
+      {
+         message.channel.send('Okay...1');
+         const dispatcher = connection.playFile('./Audio/way.mp3');
+
+         dispatcher.on("end", end => { voiceChannel.leave(); });
+
+       }).catch(err => message.channel.send(err));
    message.channel.send('Okay...4');
   }
 });
