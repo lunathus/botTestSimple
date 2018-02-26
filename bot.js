@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-var isReady = true;
 
 client.on('ready', () => {
     console.log('I am ready!');
@@ -15,21 +14,16 @@ client.on('message', message => {
         message.channel.send('...');
         message.channel.send('Okay...');
   	}
-  if (isReady && message.content === '!way')
+  if (message.content === '!way')
   {
-  isReady = false;
   const channel = message.member.voiceChannel;
-
-    channel.join().then(connection =>
-  {
       message.channel.send('Okay...1');
-     const dispatcher = connection.playFile('./Audio/way.mp3');
-     dispatcher.on("end", end => {
-       channel.leave();
-       });
-   }).catch(err => console.log(err));
-   isReady = true;
-   message.channel.send('Okay...2');
+    channel.join()
+      message.channel.send('Okay...2');
+    .then(connection => console.log('Connected!'))
+      message.channel.send('Okay...3');
+    .catch(console.error);
+   message.channel.send('Okay...4');
   }
 });
 
