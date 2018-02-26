@@ -18,7 +18,7 @@ client.on('message', message => {
   {
   message.channel.send('Okay...1');
   voiceChannel.join()
-  .then(connection => console.log('Connected!'))
+  .then(connection => message.channel.send('Connected!'))
   .catch(console.error);
    message.channel.send('Okay...4');
   }
