@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const talkedRecently = new Set();
+const recentlyway = new Set();
+const recentlyairhorn = new Set();
+const ugandasong = new Set();
 
 client.on('ready', () => {
     console.log('I am ready!');
@@ -17,7 +19,7 @@ client.on('message', message => {
   	}
     if (message.content === '!way')
     {
-      if (talkedRecently.has(message.author.id))
+      if (recentlyway.has(message.author.id))
         return;
 
       message.member.voiceChannel.join()
@@ -30,14 +32,14 @@ client.on('message', message => {
           })
        .catch(err => message.reply(err));
       
-      talkedRecently.add(message.author.id);
+      recentlyway.add(message.author.id);
       setTimeout(() => {
-        talkedRecently.delete(message.author.id);
+        recentlyway.delete(message.author.id);
       }, 30000); //30s
     }
     if (message.content === '!airhorn')
     {
-      if (talkedRecently.has(message.author.id))
+      if (recentlyairhorn.has(message.author.id))
         return;
 
       message.member.voiceChannel.join()
@@ -50,19 +52,20 @@ client.on('message', message => {
           })
        .catch(err => message.reply(err));
       
-      talkedRecently.add(message.author.id);
+      recentlyairhorn.add(message.author.id);
       setTimeout(() => {
-        talkedRecently.delete(message.author.id);
+        recentlyairhorn.delete(message.author.id);
       }, 30000); //30s
     }
     if (message.content === '!ugandasong')
     {
-      if (talkedRecently.has(message.author.id))
+      if (ugandasong.has(message.author.id))
         return;
 
       message.member.voiceChannel.join()
        .then(connection => 
-          {message.reply('I lost my way... :Cry:');
+          {const cry = client.emojis.find("name", "cry");
+           message.reply('I lost my way... ${cry}');
            const dispatcher = connection.playFile('./Audio/lostmyway.mp3');
            dispatcher.on("end", end => {
            message.member.voiceChannel.leave();
@@ -70,9 +73,9 @@ client.on('message', message => {
           })
        .catch(err => message.reply(err));
       
-      talkedRecently.add(message.author.id);
+      ugandasong.add(message.author.id);
       setTimeout(() => {
-        talkedRecently.delete(message.author.id);
+        ugandasong.delete(message.author.id);
       }, 600000); //10min
     }
 });
