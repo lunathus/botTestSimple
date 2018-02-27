@@ -64,8 +64,7 @@ client.on('message', message => {
 
       message.member.voiceChannel.join()
        .then(connection => 
-          {const cry = client.emojis.find("name", "cry");
-           message.reply('I lost my way... ${cry}');
+          {message.reply('I lost my way... :Cry:');
            const dispatcher = connection.playFile('./Audio/lostmyway.mp3');
            dispatcher.on("end", end => {
            message.member.voiceChannel.leave();
