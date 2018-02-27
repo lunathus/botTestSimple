@@ -35,7 +35,7 @@ client.on('message', message => {
         talkedRecently.delete(message.author.id);
       }, 30000);
     }
-    if (message.content === '!way')
+    if (message.content === '!airhorn')
     {
       if (talkedRecently.has(message.author.id))
         return;
