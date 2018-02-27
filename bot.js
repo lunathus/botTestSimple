@@ -16,6 +16,7 @@ client.on('message', message => {
   	}
     if (message.content === '!way')
     {
+      message.author.setTimeout(,60000);
       message.member.voiceChannel.join()
        .then(connection => 
           {message.reply('YOU DO NOT KNOW THE WAY!');
