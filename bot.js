@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const talkedRecently = new Set();
 
 client.on('ready', () => {
     console.log('I am ready!');
@@ -16,7 +17,9 @@ client.on('message', message => {
   	}
     if (message.content === '!way')
     {
-      message.author.setTimeout(,60000);
+      if (talkedRecently.has(message.author.id))
+        return;
+
       message.member.voiceChannel.join()
        .then(connection => 
           {message.reply('YOU DO NOT KNOW THE WAY!');
@@ -26,6 +29,11 @@ client.on('message', message => {
            });
           })
        .catch(err => message.reply(err));
+      
+      talkedRecently.add(message.author.id);
+      setTimeout(() => {
+        talkedRecently.delete(message.author.id);
+      }, 60000);
     }
 });
 
