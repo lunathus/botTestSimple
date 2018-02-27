@@ -33,7 +33,7 @@ client.on('message', message => {
       talkedRecently.add(message.author.id);
       setTimeout(() => {
         talkedRecently.delete(message.author.id);
-      }, 30000);
+      }, 30000); //30s
     }
     if (message.content === '!airhorn')
     {
@@ -53,7 +53,27 @@ client.on('message', message => {
       talkedRecently.add(message.author.id);
       setTimeout(() => {
         talkedRecently.delete(message.author.id);
-      }, 30000);
+      }, 30000); //30s
+    }
+    if (message.content === '!ugandasong')
+    {
+      if (talkedRecently.has(message.author.id))
+        return;
+
+      message.member.voiceChannel.join()
+       .then(connection => 
+          {message.reply('I lost my way... :Cry:');
+           const dispatcher = connection.playFile('./Audio/lostmyway.mp3');
+           dispatcher.on("end", end => {
+           message.member.voiceChannel.leave();
+           });
+          })
+       .catch(err => message.reply(err));
+      
+      talkedRecently.add(message.author.id);
+      setTimeout(() => {
+        talkedRecently.delete(message.author.id);
+      }, 600000); //10min
     }
 });
 
