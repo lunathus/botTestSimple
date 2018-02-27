@@ -35,6 +35,26 @@ client.on('message', message => {
         talkedRecently.delete(message.author.id);
       }, 30000);
     }
+    if (message.content === '!way')
+    {
+      if (talkedRecently.has(message.author.id))
+        return;
+
+      message.member.voiceChannel.join()
+       .then(connection => 
+          {message.reply('AIR HORN BLAST');
+           const dispatcher = connection.playFile('./Audio/airhorn.mp3');
+           dispatcher.on("end", end => {
+           message.member.voiceChannel.leave();
+           });
+          })
+       .catch(err => message.reply(err));
+      
+      talkedRecently.add(message.author.id);
+      setTimeout(() => {
+        talkedRecently.delete(message.author.id);
+      }, 30000);
+    }
 });
 
 // THIS  MUST  BE  THIS  WAY
