@@ -19,23 +19,26 @@ client.on('message', message => {
   	}
     if (message.content === '!way')
     {
-      if (recentlyway.has(message.author.id))
-        return;
-
-      message.member.voiceChannel.join()
-       .then(connection => 
-          {message.reply('YOU DO NOT KNOW THE WAY!');
-           const dispatcher = connection.playFile('./Audio/way.mp3');
-           dispatcher.on("end", end => {
-           message.member.voiceChannel.leave();
-           });
-          })
-       .catch(err => message.reply(err));
-      
-      recentlyway.add(message.author.id);
-      setTimeout(() => {
-        recentlyway.delete(message.author.id);
-      }, 30000); //30s
+      if (recentlyway.has(message.author.id)) {
+        msg.channel.send("Wait 1 minute before getting typing this again. - " + msg.author);
+      }
+        else {
+        
+          message.member.voiceChannel.join()
+           .then(connection => 
+              {message.reply('YOU DO NOT KNOW THE WAY!');
+               const dispatcher = connection.playFile('./Audio/way.mp3');
+               dispatcher.on("end", end => {
+               message.member.voiceChannel.leave();
+               });
+              })
+           .catch(err => message.reply(err));
+        
+          recentlyway.add(message.author.id);
+          setTimeout(() => {
+            recentlyway.delete(message.author.id);
+          }, 30000); //30s
+        }
     }
     if (message.content === '!airhorn')
     {
