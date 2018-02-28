@@ -41,43 +41,47 @@ client.on('message', message => {
     }
     if (message.content === '!airhorn')
     {
-      if (recentlyairhorn.has(message.author.id))
-        return;
-
-      message.member.voiceChannel.join()
-       .then(connection => 
-          {message.reply('AIR HORN BLAST');
-           const dispatcher = connection.playFile('./Audio/airhorn.mp3');
-           dispatcher.on("end", end => {
-           message.member.voiceChannel.leave();
-           });
-          })
-       .catch(err => message.reply(err));
-      
-      recentlyairhorn.add(message.author.id);
-      setTimeout(() => {
-        recentlyairhorn.delete(message.author.id);
-      }, 30000); //30s
+      if (recentlyway.has(message.author.id)) {
+        message.channel.send("Spama não " + message.author);
+      }
+        else {
+          message.member.voiceChannel.join()
+           .then(connection => 
+              {message.reply('AIR HORN BLAST');
+               const dispatcher = connection.playFile('./Audio/airhorn.mp3');
+               dispatcher.on("end", end => {
+               message.member.voiceChannel.leave();
+               });
+              })
+           .catch(err => message.reply(err));
+        
+          recentlyway.add(message.author.id);
+          setTimeout(() => {
+            recentlyway.delete(message.author.id);
+          }, 30000); //30s
+        }
     }
     if (message.content === '!ugandasong')
     {
-      if (ugandasong.has(message.author.id))
-        return;
-
-      message.member.voiceChannel.join()
-       .then(connection => 
-          {message.reply('I lost my way... <:Cry:417707658456596480>');
-           const dispatcher = connection.playFile('./Audio/lostmyway.mp3');
-           dispatcher.on("end", end => {
-           message.member.voiceChannel.leave();
-           });
-          })
-       .catch(err => message.reply(err));
-      
-      ugandasong.add(message.author.id);
-      setTimeout(() => {
-        ugandasong.delete(message.author.id);
-      }, 600000); //10min
+      if (recentlyway.has(message.author.id)) {
+        message.channel.send("Spama não " + message.author);
+      }
+        else {
+          message.member.voiceChannel.join()
+           .then(connection => 
+              {message.reply('I lost my way... <:Cry:417707658456596480>');
+               const dispatcher = connection.playFile('./Audio/lostmyway.mp3');
+               dispatcher.on("end", end => {
+               message.member.voiceChannel.leave();
+               });
+              })
+           .catch(err => message.reply(err));
+        
+          recentlyway.add(message.author.id);
+          setTimeout(() => {
+            recentlyway.delete(message.author.id);
+          }, 600000); //10min
+        }
     }
 });
 
