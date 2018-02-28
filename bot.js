@@ -20,7 +20,7 @@ client.on('message', message => {
     if (message.content === '!way')
     {
       if (recentlyway.has(message.author.id)) {
-        msg.channel.send("Wait 1 minute before getting typing this again. - " + msg.author);
+        message.channel.send("Wait 1 minute before getting typing this again. - " + message.author);
       }
         else {
         
