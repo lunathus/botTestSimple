@@ -10,11 +10,7 @@ client.on('ready', () => {
 
 client.on('message', message => {
     if (message.content === '!ping') {
-    	let start = now();
-        message.channel.sendMessage("*Pinging...*")
-            .then(m => {
-                let end = now();
-                m.edit(`:ping_pong: Pong!\nLatency by timestamp: **${m.createdTimestamp - message.createdTimestamp}ms**\nLatency by now(): **${(end - start).toFixed(0)}ms**\nDiscord Latency: **${Math.round(client.ping)}ms**`);
+    	message.channel.send('Pong!');
   	}
     if (message.content === '!gw2') {
     	message.channel.send('NOOOOOOOOOO!');
