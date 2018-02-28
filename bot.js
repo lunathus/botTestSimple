@@ -20,10 +20,9 @@ client.on('message', message => {
     if (message.content === '!way')
     {
       if (recentlyway.has(message.author.id)) {
-        message.channel.send("Wait 1 minute before getting typing this again. - " + message.author);
+        message.channel.send("Spama não " + message.author);
       }
         else {
-        
           message.member.voiceChannel.join()
            .then(connection => 
               {message.reply('YOU DO NOT KNOW THE WAY!');
