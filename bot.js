@@ -10,7 +10,11 @@ client.on('ready', () => {
 
 client.on('message', message => {
     if (message.content === '!ping') {
-    	message.channel.send('Pong');
+    	let start = now();
+        msg.channel.sendMessage("*Pinging...*")
+            .then(m => {
+                let end = now();
+                m.edit(`:ping_pong: Pong!\nLatency by timestamp: **${m.createdTimestamp - msg.createdTimestamp}ms**\nLatency by now(): **${(end - start).toFixed(0)}ms**\nDiscord Latency: **${Math.round(client.ping)}ms**`);
   	}
     if (message.content === '!gw2') {
     	message.channel.send('NOOOOOOOOOO!');
@@ -65,6 +69,7 @@ client.on('message', message => {
       message.member.voiceChannel.join()
        .then(connection => 
           {message.reply('I lost my way... :Cry:');
+           msg.channel.sendMessage(':Cry:');
            const dispatcher = connection.playFile('./Audio/lostmyway.mp3');
            dispatcher.on("end", end => {
            message.member.voiceChannel.leave();
