@@ -20,7 +20,7 @@ client.on('message', message => {
     if (message.content === '!way')
     {
       if (recentlyway.has(message.author.id)) {
-        message.channel.send("Spama não " + message.author);
+        message.channel.send("Spama não " + message.author ", espera " + timeleft);
       }
         else {
           message.member.voiceChannel.join()
@@ -34,7 +34,7 @@ client.on('message', message => {
            .catch(err => message.reply(err));
         
           recentlyway.add(message.author.id);
-          setTimeout(() => {
+          var timeleft = setTimeout(() => {
             recentlyway.delete(message.author.id);
           }, 30000); //30s
         }
