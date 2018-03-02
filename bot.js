@@ -19,8 +19,11 @@ client.on('message', message => {
   	}
     if (message.content === '!way')
     {
-      if (recentlyway.has(!message.author.id)) {
-        message.member.voiceChannel.join()
+      if (recentlyway.has(message.author.id)) {
+        message.channel.send('Spama não ' + message.author);
+      }
+        else {
+          message.member.voiceChannel.join()
            .then(connection => 
               {message.reply('YOU DO NOT KNOW THE WAY!');
                const dispatcher = connection.playFile('./Audio/way.mp3');
@@ -31,12 +34,9 @@ client.on('message', message => {
            .catch(err => message.reply(err));
         
           recentlyway.add(message.author.id);
-            var left = setTimeout(() => {
+            setTimeout(() => {
               recentlyway.delete(message.author.id);
             }, 30000); //30s
-      }
-        else {
-          message.channel.send('Spama não ' + left);
         }
     }
     if (message.content === '!airhorn')
