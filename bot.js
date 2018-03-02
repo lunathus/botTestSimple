@@ -42,24 +42,25 @@ client.on('message', message => {
     if (message.content === '!airhorn')
     {
       if (recentlyway.has(message.author.id)) {
-        message.channel.send("Spama não " + message.author);
+        message.channel.send("Spama não " + left);
+        return
       }
-        else {
-          message.member.voiceChannel.join()
-           .then(connection => 
-              {message.reply('AIR HORN BLAST');
-               const dispatcher = connection.playFile('./Audio/airhorn.mp3');
-               dispatcher.on("end", end => {
-               message.member.voiceChannel.leave();
-               });
-              })
-           .catch(err => message.reply(err));
-        
-          recentlyway.add(message.author.id);
-          setTimeout(() => {
-            recentlyway.delete(message.author.id);
-          }, 30000); //30s
-        }
+      message.member.voiceChannel.join()
+       .then(connection => 
+          {message.reply('AIR HORN BLAST');
+           const dispatcher = connection.playFile('./Audio/airhorn.mp3');
+           dispatcher.on("end", end => {
+           message.member.voiceChannel.leave();
+           });
+          })
+       .catch(err => message.reply(err));
+    
+      if (recentlyway.has(!message.author.id)) {
+        recentlyway.add(message.author.id);
+      }
+      var left = setTimeout(() => {
+        recentlyway.delete(message.author.id);
+      }, 30000); //30s
     }
     if (message.content === '!ugandasong')
     {
