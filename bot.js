@@ -55,9 +55,11 @@ client.on('message', message => {
           })
        .catch(err => message.reply(err));
     
-      if (recentlyway.has(!message.author.id)) {
+      if (recentlyway.has(message.author.id)) {
+        return
+      } else {
         recentlyway.add(message.author.id);
-      }
+        }
       var left = setTimeout(() => {
         recentlyway.delete(message.author.id);
       }, 30000); //30s
