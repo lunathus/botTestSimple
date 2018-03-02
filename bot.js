@@ -54,11 +54,11 @@ client.on('message', message => {
                });
              })
            .catch(err => message.reply(err));
-          
+        
           recentlyway.add(message.author.id);
-          setTimeout(() => {
-            recentlyway.delete(message.author.id);
-          }, 30000); //30s
+            setTimeout(() => {
+              recentlyway.delete(message.author.id);
+            }, 30000); //30s
         }
     }
     if (message.content === '!ugandasong')
