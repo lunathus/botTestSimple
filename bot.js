@@ -42,7 +42,7 @@ client.on('message', message => {
     if (message.content === '!airhorn')
     {
       if (recentlyway.has(message.author.id)) {
-        message.channel.send("Spama não " + left);
+        message.channel.send("Spama não " + message.author);
         return
       }
       message.member.voiceChannel.join()
@@ -54,13 +54,9 @@ client.on('message', message => {
            });
           })
        .catch(err => message.reply(err));
-    
-      if (recentlyway.has(message.author.id)) {
-        return
-      } else {
-        recentlyway.add(message.author.id);
-        }
-      var left = setTimeout(() => {
+      
+      recentlyway.add(message.author.id);
+      setTimeout(() => {
         recentlyway.delete(message.author.id);
       }, 30000); //30s
     }
