@@ -3,6 +3,7 @@ const client = new Discord.Client();
 const recentlyway = new Set();
 const recentlyairhorn = new Set();
 const ugandasong = new Set();
+var n;
 
 client.on('ready', () => {
     console.log('I am ready!');
@@ -20,9 +21,10 @@ client.on('message', message => {
     if (message.content === '!way')
     {
       if (recentlyway.has(message.author.id)) {
-        message.channel.send('Spama não ' + message.author);
+        message.channel.send('Spama não ' + n);
       }
         else {
+          n = 30;
           message.member.voiceChannel.join()
            .then(connection => 
               {message.reply('YOU DO NOT KNOW THE WAY!');
@@ -35,8 +37,9 @@ client.on('message', message => {
         
           recentlyway.add(message.author.id);
             setTimeout(() => {
+              n--;
               recentlyway.delete(message.author.id);
-            }, 30000); //30s
+            }, 1000); //30s
         }
     }
     if (message.content === '!airhorn')
