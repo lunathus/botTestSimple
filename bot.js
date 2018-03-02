@@ -20,7 +20,7 @@ client.on('message', message => {
     if (message.content === '!way')
     {
       if (recentlyway.has(message.author.id)) {
-        message.channel.send('Spama não ' + n);
+        message.channel.send('Spama não ' + message.author);
       }
         else {
           message.member.voiceChannel.join()
