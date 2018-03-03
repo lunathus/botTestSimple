@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const recentlyway = new Set();
 const recentlyairhorn = new Set();
-const ugandasong = new Set();
+const recentlyugandasong = new Set();
 
 client.on('ready', () => {
     console.log('I am ready!');
@@ -46,7 +46,7 @@ client.on('message', message => {
     }
     if (message.content === '!airhorn')
     {
-      if (recentlyway.has(message.author.id)) {
+      if (recentlyairhorn.has(message.author.id)) {
         message.channel.send("Spama não " + message.author);
       }
         else {
@@ -60,15 +60,15 @@ client.on('message', message => {
              })
            .catch(err => message.reply(err));
         
-          recentlyway.add(message.author.id);
+          recentlyairhorn.add(message.author.id);
           setTimeout(() => {
-            recentlyway.delete(message.author.id);
+            recentlyairhorn.delete(message.author.id);
           }, 30000); //30s
         }
     }
     if (message.content === '!ugandasong')
     {
-      if (recentlyway.has(message.author.id)) {
+      if (recentlyugandasong.has(message.author.id)) {
         message.channel.send("Spama não " + message.author);
       }
         else {
@@ -82,9 +82,9 @@ client.on('message', message => {
               })
            .catch(err => message.reply(err));
         
-          recentlyway.add(message.author.id);
+          recentlyugandasong.add(message.author.id);
           setTimeout(() => {
-            recentlyway.delete(message.author.id);
+            recentlyugandasong.delete(message.author.id);
           }, 600000); //10min
         }
     }
