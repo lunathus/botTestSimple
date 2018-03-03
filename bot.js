@@ -3,6 +3,10 @@ const client = new Discord.Client();
 const recentlyway = new Set();
 const recentlyairhorn = new Set();
 const recentlyugandasong = new Set();
+const Canvas = require('canvas');
+const fs = require('fs');
+const path = require('path');
+const https = require('https');
 
 client.on('ready', () => {
     console.log('I am ready!');
@@ -13,8 +17,8 @@ client.on('message', message => {
       let start = new Date();
       message.channel.send("*Pinging...*")
         .then(m => {
-           let end = new Date();
-           m.edit(`Pong! :ping_pong:\nLatency by timestamp: **${m.createdTimestamp - message.createdTimestamp}ms**\nLatency by Date(): **${(end - start).toFixed(0)}ms**\nDiscord Latency: **${Math.round(client.ping)}ms**`);
+          let end = new Date();
+          m.edit(`Pong! :ping_pong:\nLatency by timestamp: **${m.createdTimestamp - message.createdTimestamp}ms**\nLatency by Date(): **${(end - start).toFixed(0)}ms**\nDiscord Latency: **${Math.round(client.ping)}ms**`);
         });
   	}
     if (message.content === '!gw2') {
@@ -87,6 +91,61 @@ client.on('message', message => {
             recentlyugandasong.delete(message.author.id);
           }, 600000); //10min
         }
+    }
+    if(message.content === '!triggered'){
+      function aaavatar(tempo){
+        var options = message.author.avatarURL;
+        var request = https.get(options, function(res){
+          var imagedata = ''
+          res.setEncoding('binary')
+          
+          res.on('data', function(chunk){
+            imagedata += chunk
+          })
+          
+          res.on('end', function(){
+            fs.writeFile(__dirname + '/Images/avatar.png', imagedata, 'binary', function(err){
+              if (err) throw err
+                console.log('File saved.')
+            })
+          })
+        })
+      }
+    
+      message.channel.send('**AAAAAAAAAAAA**');
+      aaavatar();
+      
+      setTimeout(() => {
+        fs.readFile(__dirname + '/Images/avatar.png', function(err, data) {
+          if (err) throw err;
+          var avatar = new Canvas.Image;
+          avatar.src = data;
+        
+          var canvas = new Canvas(320, 371);
+          var ctx = canvas.getContext('2d');
+          
+          ctx.fillStyle = 'white';
+          ctx.fillRect(0, 0, 320, 371);
+          ctx.drawImage(avatar, 0, 0, 320, 320);
+          const imgData = ctx.getImageData(0, 0, 320, 320);
+          const data1 = imgData.data;
+          for (let i = 0; i < data1.length; i += 4) {
+            data1[i] = Math.max(255, data1[i]);
+          }
+          ctx.putImageData(imgData, 0, 0);
+          
+          fs.readFile(__dirname + '/Images/Triggered.png', function(err, data) {
+            if (err) throw err;
+            var base = new Canvas.Image;
+            base.src = data;
+            ctx.drawImage(base, 0, 0);
+            
+            const buffer = canvas.toBuffer();
+            const toSend = fs.writeFileSync('file.png', buffer);
+            return message.channel.send('', {file: 'file.png'}).catch(err => message.channel.send(`${err.name}: ${err.message}`));
+          });
+        });
+      }, 1000); //1s
     }
 });
 
