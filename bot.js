@@ -6,7 +6,7 @@ const recentlyugandasong = new Set();
 const Canvas = require('canvas');
 const fs = require('fs');
 const path = require('path');
-const https = require('https');
+const snekfetch = require('snekfetch');
 
 client.on('ready', () => {
     console.log('I am ready!');
@@ -93,59 +93,37 @@ client.on('message', message => {
         }
     }
     if(message.content === '!triggered'){
-      function aaavatar(tempo){
-        var options = message.author.avatarURL;
-        var request = https.get(options, function(res){
-          var imagedata = ''
-          res.setEncoding('binary')
-          
-          res.on('data', function(chunk){
-            imagedata += chunk
-          })
-          
-          res.on('end', function(){
-            fs.writeFile(__dirname + '/Images/avatar.png', imagedata, 'binary', function(err){
-              if (err) throw err
-                console.log('File saved.')
-            })
-          })
-        })
-      }
-    
       message.channel.send('**AAAAAAAAAAAA**');
-      aaavatar();
-      
-      setTimeout(() => {
-        fs.readFile(__dirname + '/Images/avatar.png', function(err, data) {
-          if (err) throw err;
-          var avatar = new Canvas.Image;
-          avatar.src = data;
-        
-          var canvas = new Canvas(320, 371);
-          var ctx = canvas.getContext('2d');
-          
-          ctx.fillStyle = 'white';
-          ctx.fillRect(0, 0, 320, 371);
-          ctx.drawImage(avatar, 0, 0, 320, 320);
-          const imgData = ctx.getImageData(0, 0, 320, 320);
-          const data1 = imgData.data;
-          for (let i = 0; i < data1.length; i += 4) {
-            data1[i] = Math.max(255, data1[i]);
-          }
-          ctx.putImageData(imgData, 0, 0);
-          
-          fs.readFile(__dirname + '/Images/Triggered.png', function(err, data) {
+      fs.readFile(__dirname + '/Images/Triggered.png', function(err, data) {
+        if (err) throw err;
+        const Image = Canvas.Image;
+        const canvas = new Canvas(320, 371);
+        const ctx = canvas.getContext('2d');
+        const base = new Image();
+        const avatar = new Image();
+        base.src = data;
+        snekfetch.get(message.author.avatarURL)
+          .then(r => fs.writeFileSync('avatar.png', r.body));
+        setTimeout(() => {
+          fs.readFile('avatar.png', function(err, body) {
             if (err) throw err;
-            var base = new Canvas.Image;
-            base.src = data;
+            avatar.src = body;
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, 320, 371);
+            ctx.drawImage(avatar, 0, 0, 320, 320);
+            const imgData = ctx.getImageData(0, 0, 320, 320);
+            const data1 = imgData.data;
+            for (let i = 0; i < data1.length; i += 4) {
+              data1[i] = Math.max(255, data1[i]);
+            }
+            ctx.putImageData(imgData, 0, 0);
             ctx.drawImage(base, 0, 0);
-            
             const buffer = canvas.toBuffer();
             const toSend = fs.writeFileSync('file.png', buffer);
             return message.channel.send('', {file: 'file.png'}).catch(err => message.channel.send(`${err.name}: ${err.message}`));
           });
-        });
-      }, 1000); //1s
+        }, 1000); //1s
+      });
     }
 });
 
