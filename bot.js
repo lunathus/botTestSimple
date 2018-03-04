@@ -93,7 +93,7 @@ client.on('message', message => {
         }
     }
     if(message.content === '!triggered'){
-      message.channel.send('**AAAAAAAAAAAA**');
+      message.channel.send('**AAAAAAAAAAAAAAAAAAAAAAAAA**');
       fs.readFile(__dirname + '/Images/Triggered.png', function(err, data) {
         if (err) throw err;
         const Image = Canvas.Image;
