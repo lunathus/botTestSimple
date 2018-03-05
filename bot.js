@@ -13,7 +13,8 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-    if (message.content === '!ping') {
+    if (message.content === '!ping') 
+	{
       let start = new Date();
       message.channel.send("*Pinging...*")
         .then(m => {
@@ -21,13 +22,14 @@ client.on('message', message => {
           m.edit(`Pong! :ping_pong:\nLatency by timestamp: **${m.createdTimestamp - message.createdTimestamp}ms**\nLatency by Date(): **${(end - start).toFixed(0)}ms**\nDiscord Latency: **${Math.round(client.ping)}ms**`);
         });
   	}
-    if (message.content === '!gw2') {
+    if (message.content === '!gw2') 
+	{
     	message.channel.send('NOOOOOOOOOO!');
         message.channel.send('...');
         message.channel.send('Okay...');
   	}
     if (message.content === '!way')
-    {
+	{
       if (recentlyway.has(message.author.id)) {
         message.channel.send('Spama não ' + message.author);
       }
@@ -48,6 +50,10 @@ client.on('message', message => {
           }, 30000); //30s
         }
     }
+	if (message.content === '!way god')
+	{
+      recentlyway.delete(message.author.id);
+	}
     if (message.content === '!airhorn')
     {
       if (recentlyairhorn.has(message.author.id)) {
@@ -70,6 +76,10 @@ client.on('message', message => {
           }, 30000); //30s
         }
     }
+	if (message.content === '!airhorn god')
+	{
+      recentlyairhorn.delete(message.author.id);
+	}
     if (message.content === '!ugandasong')
     {
       if (recentlyugandasong.has(message.author.id)) {
@@ -92,7 +102,12 @@ client.on('message', message => {
           }, 600000); //10min
         }
     }
-    if(message.content === '!triggered'){
+	if (message.content === '!ugandasong god')
+	{
+      recentlyugandasong.delete(message.author.id);
+	}
+    if(message.content === '!triggered')
+	{
       message.channel.send('**AAAAAAAAAAAAAAAAAAAAAAAAA**');
       fs.readFile(__dirname + '/Images/Triggered.png', function(err, data) {
         if (err) throw err;
@@ -126,6 +141,5 @@ client.on('message', message => {
       });
     }
 });
-
-// THIS  MUST  BE  THIS  WAY
+// GOD OF TRIGGERED
 client.login(process.env.BOT_TOKEN);
