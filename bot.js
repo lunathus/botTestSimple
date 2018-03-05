@@ -49,6 +49,7 @@ client.on('message', message => {
   }
   if (message.content === '!way god') {
     recentlyway.delete(message.author.id);
+    message.channel.send("GOD");
   }
   if (message.content === '!airhorn') {
     if (recentlyairhorn.has(message.author.id)) {
@@ -73,6 +74,7 @@ client.on('message', message => {
   }
   if (message.content === '!airhorn god') {
     recentlyairhorn.delete(message.author.id);
+    message.channel.send("GOD");
   }
   if (message.content === '!ugandasong') {
     if (recentlyugandasong.has(message.author.id)) {
@@ -97,6 +99,7 @@ client.on('message', message => {
   }
   if (message.content === '!ugandasong god') {
     recentlyugandasong.delete(message.author.id);
+    message.channel.send("GOD");
   }
   if(message.content === '!triggered') {
     message.channel.send('**AAAAAAAAAAAAAAAAAAAAAAAAA**');
