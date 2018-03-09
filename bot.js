@@ -7,7 +7,6 @@ const Canvas = require('canvas');
 const fs = require('fs');
 const path = require('path');
 const snekfetch = require('snekfetch');
-const { URL } = require('url');
 
 client.on('ready', () => {
     console.log('I am ready!');
@@ -113,7 +112,7 @@ client.on('message', message => {
       const avatar = new Image();
       base.src = data;
       snekfetch.get(message.author.avatarURL)
-      .then(r => fs.writeFileSync('file:///github.com/lunathus/botTestSimple/blob/master/avatar.png', r.body));
+      .then(r => fs.writeFileSync('avatar.png', r.body));
       setTimeout(() => {
         fs.readFile('avatar.png', function(err, body) {
           if (err) throw err;
@@ -129,7 +128,7 @@ client.on('message', message => {
           ctx.putImageData(imgData, 0, 0);
           ctx.drawImage(base, 0, 0);
           const buffer = canvas.toBuffer();
-          const toSend = fs.writeFileSync('file:///github.com/lunathus/botTestSimple/blob/master/file.png', buffer);
+          const toSend = fs.writeFileSync('file.png', buffer);
           return message.channel.send('', {file: 'file.png'}).catch(err => message.channel.send(`${err.name}: ${err.message}`));
         });
       }, 1000); //1s
