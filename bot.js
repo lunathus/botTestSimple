@@ -112,9 +112,9 @@ client.on('message', message => {
       const avatar = new Image();
       base.src = data;
       snekfetch.get(message.author.avatarURL)
-      .then(r => fs.writeFileSync('github.com/lunathus/botTestSimple/avatar.png', r.body));
+      .then(r => fs.writeFileSync('avatar.png', r.body));
       setTimeout(() => {
-        fs.readFile('avatar.png', function(err, body) {
+        fs.readFile(__dirname + 'avatar.png', function(err, body) {
           if (err) throw err;
           avatar.src = body;
           ctx.fillStyle = 'white';
@@ -128,8 +128,8 @@ client.on('message', message => {
           ctx.putImageData(imgData, 0, 0);
           ctx.drawImage(base, 0, 0);
           const buffer = canvas.toBuffer();
-          const toSend = fs.writeFileSync('github.com/lunathus/botTestSimple/file.png', buffer);
-          return message.channel.send('', {file: 'github.com/lunathus/botTestSimple/file.png'}).catch(err => message.channel.send(`${err.name}: ${err.message}`));
+          const toSend = fs.writeFileSync(__dirname + 'file.png', buffer);
+          return message.channel.send('', {file: __dirname + 'file.png'}).catch(err => message.channel.send(`${err.name}: ${err.message}`));
         });
       }, 1000); //1s
     });
